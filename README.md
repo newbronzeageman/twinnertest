@@ -22,8 +22,6 @@ cd into the TwitterAPI folder in another terminal (leave the previous one open)
 run to get all dependencies: ```npm install```
 create a file (in the same TwitterAPI folder) called config.py and add the following lines:
 ```
-API_KEY = ""
-API_SECRET = ""
 BEARER_TOKEN = ""
 ```
 fill in the above with your keys
