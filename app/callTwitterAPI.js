@@ -11,6 +11,7 @@ export default function callTwitterAPI(props) {
     const [buttonPress, setButtonPress] = useState(false)
     useEffect(() => {
         if (buttonPress) {
+            setButtonPress(false);
             console.log("fetching " + endpointURL)
             //at most 5 times every 15 min... (wow thats lame!)
             fetch(endpointURL).then((res) => res.text()).then((data) => {
@@ -19,21 +20,12 @@ export default function callTwitterAPI(props) {
             });
             //COMMENT OUT BELOW AND UNCOMMENT OUT ABOVE TO USE TWITTER API
             //props.setData("['newbronzeageman', 'CryptoSleuthxyz'] \n ['newbronzeageman', 'CryptoSleuthxyz'] \n ['newbronzeageman', 'Madelineppi', 'HYassermyz', 'grisiman', 'eirchuang1994', 'jhartel23', 'danbayk', 'arnold10112', 'Robert88566211', '0xDEGENKONG', 'ElCaco00001', 's3kee']\n")
-            setButtonPress(false);
         }
     }, [buttonPress]);
 
     //TWITTER API STUFF END ****************************************
     const getContestants = () => {
-        //console.log(urlString)
-        //when twitter api working, we will call twitter api and update contestants list here
-        // Make request
-        //console.log(endpointURL)
         setButtonPress(true);
-
-        //contestants = ["Abby", "Bob", "Steve", "Zeus", "Bob", "Steve", "Zeus", "Bob", "Steve", "Zeus", "Bob", "Steve", "Zeus", "Bob", "Steve", "Zeus"]
-        //console.log(contestants)
-        //setContestantList(contestants)
     }
 
     return (

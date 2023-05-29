@@ -1,12 +1,11 @@
 import Core from "./Core";
-
+import './globals.css';
 export default function Home() {
   return (
-    <div className="Main">
+    <div id="Main">
       <title>Twinner</title>
-      <h1>Twinner</h1>
+      <h2 id="title">Twinner</h2>
       <Core />
     </div >
-
   );
 }

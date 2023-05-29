@@ -1,0 +1,68 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/* #root {
+    font-family: Sulsans, sans-serif;
+} */
+
+#FormGroup {
+    align-items: center;
+}
+
+#FormGroupLabel {
+    text-align: left;
+    justify-content: left;
+}
+
+#ContestantList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#Main {
+    background-color: rgb(255, 219, 87);
+    overflow: auto;
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+}
+
+#Main::before {
+    content: "";
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('./icon.png');
+    background-size: 40%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.25;
+}
+
+h1 {
+    color: blue;
+}
+
+#title {
+    text-align: center;
+    font-size: 300%;
+    font-style: italic;
+    color: blue;
+}
+
+Button {
+    font-weight: bold !important;
+    font-stretch: ultra-expanded !important;
+    height: 55px;
+    border-width: 2px;
+}
+
+/* .MuiFormLabel {
+    border-color: blue !important;
+} */

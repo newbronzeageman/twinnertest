@@ -158,6 +158,7 @@ export default function Mainstuff() {
     const chooseWinner = () => {
         //when contract for chainlink random number verifier caller done, we connect it and update the winner here
         handleSubmitInfura();
+        //setWinnerString('Winner: ' + contestantList[2])
         //console.log(winnerString)
     }
     function renderRow(props) {
@@ -175,23 +176,30 @@ export default function Mainstuff() {
     return (
         <div>
             <TextField id="outlined-basic" label="url here" variant="outlined" onChange={event => printURL(event.target.value)} />
-            <h3>Options</h3>
-            <FormGroup>
-                <FormControlLabel control={<Checkbox checked={checkboxes.checkboxLiked} onChange={handleCheckboxChange} name="checkboxLiked" />} label="Liked" />
-                <FormControlLabel control={<Checkbox checked={checkboxes.checkboxRetweeted} onChange={handleCheckboxChange} name="checkboxRetweeted" />} label="Retweeted" />
-                <FormControlLabel control={<Checkbox checked={checkboxes.checkboxFollowing} onChange={handleCheckboxChange} name="checkboxFollowing" />} label="Following" />
+            <h1>Options</h1>
+            <FormGroup id='FormGroup'>
+                <div>
+                    <FormControlLabel id='FormGroupLabel' control={<Checkbox checked={checkboxes.checkboxLiked} onChange={handleCheckboxChange} name="checkboxLiked" />} label="Liked" />
+                    <FormControlLabel id='FormGroupLabel' control={<Checkbox checked={checkboxes.checkboxRetweeted} onChange={handleCheckboxChange} name="checkboxRetweeted" />} label="Retweeted" />
+                    <FormControlLabel id='FormGroupLabel' control={<Checkbox checked={checkboxes.checkboxFollowing} onChange={handleCheckboxChange} name="checkboxFollowing" />} label="Following" />
+                </div>
             </FormGroup>
             <CallTwitterAPI setData={setData} userName={userName} tweetID={tweetID} />
             <h1>First 50 contestants</h1>
-            <FixedSizeList
-                height={400}
-                width={360}
-                itemSize={46}
-                itemCount={contestantList.length}
-                overscanCount={5}
-            >
-                {renderRow}
-            </FixedSizeList>
+            <div>
+                <div id='ContestantList'>
+                    <FixedSizeList
+                        height={400}
+                        width={360}
+                        itemSize={46}
+                        itemCount={contestantList.length}
+                        overscanCount={5}
+                    >
+
+                        {renderRow}
+                    </FixedSizeList>
+                </div>
+            </div>
             <Button variant="outlined" onClick={chooseWinner}>Pick Winner</Button>
             <TextField id='Winner-field' variant='outlined' value={winnerString}></TextField>
 
