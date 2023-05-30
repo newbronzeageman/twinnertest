@@ -25,7 +25,6 @@ export default function Mainstuff() {
     const signer = new ethers.Wallet(PRIVATE_KEY, provider);
     const abi = contract_abi;
     const VRFcontract = new ethers.Contract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, abi, signer);
-    const [lastRandomWord, setLastRandomWord] = useState(ethers.BigNumber.from(0));
     const handleSubmitInfura = async () => {
         const estimatedGasLimit = await VRFcontract.estimateGas.requestRandomWords();
         const approveTxUnsigned = await VRFcontract.populateTransaction.requestRandomWords();
@@ -49,17 +48,14 @@ export default function Mainstuff() {
                 payment: ethers.utils.formatUnits(payment, 18),
                 data: event,
             }
-            //console.log(JSON.stringify(info, null, 4))
-            console.log(info.randomWords[0])
-            //console.log(lastRandomWord)
-            setLastRandomWord(info.randomWords[0])
-            console.log(lastRandomWord, info.randomWords[0].mod(contestantList.length))
+            console.log(contestantList.length, info.randomWords[0])
             //we have the number, and we can get the length of the contestants list
             // do  modulo to get winner as an index of the contestant list
             //get the username from the list at that index, display in winner
             var winnerIndex = info.randomWords[0].mod(contestantList.length)
             console.log("winner index:" + winnerIndex)
             setWinnerString('Winner: ' + contestantList[winnerIndex])
+            console.log("See transaction call at: https://sepolia.etherscan.io/address/0xA90Dc27Ffa6D665641eA63109397cEc63F9768c7")
         })
     }
 
@@ -80,7 +76,6 @@ export default function Mainstuff() {
         setUserName(username)
         console.log('Tweet ID:', tweetId);
         setTweetID(tweetId)
-        //console.log(tweetID)
     }
     const [data, setData] = useState(null);
     const [checkboxes, setCheckboxes] = useState({
@@ -97,8 +92,8 @@ export default function Mainstuff() {
     };
     const [ContestantArrays, setContestantArrays] = useState(null);//0 = liked, 1 = retweeted, 2 = following
     useEffect(() => {
-        console.log(checkboxes);
-        console.log(ContestantArrays)
+        // console.log(checkboxes);
+        // console.log(ContestantArrays)
         FilterContestants();
     }, [checkboxes, ContestantArrays]);
 
@@ -130,8 +125,6 @@ export default function Mainstuff() {
         if (data == null) {
             return;
         }
-        //console.log(checkboxes)
-        console.log("IN CORE USEEFFECT")
         console.log(data)
         // Split the input string into individual array strings
         const arrayStrings = data.split('\n');
@@ -148,9 +141,6 @@ export default function Mainstuff() {
         setContestantArrays(arrays);
         // Output the arrays
         console.log(ContestantArrays);
-        //have to form the "contestant list" based on if they buttons are clicked or not
-        //for now just set it to followers only
-        FilterContestants();
     }, [data]);
 
     const [contestantList, setContestantList] = useState([]);
@@ -158,8 +148,6 @@ export default function Mainstuff() {
     const chooseWinner = () => {
         //when contract for chainlink random number verifier caller done, we connect it and update the winner here
         handleSubmitInfura();
-        //setWinnerString('Winner: ' + contestantList[2])
-        //console.log(winnerString)
     }
     function renderRow(props) {
         const { index, style } = props;
@@ -185,7 +173,7 @@ export default function Mainstuff() {
                 </div>
             </FormGroup>
             <CallTwitterAPI setData={setData} userName={userName} tweetID={tweetID} />
-            <h1>First 50 contestants</h1>
+            <h1>Contestants</h1>
             <div>
                 <div id='ContestantList'>
                     <FixedSizeList
